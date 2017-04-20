@@ -1,0 +1,7 @@
+var onRun = function(context) {
+
+if(![[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:"http://evrybo.com"]]){
+    print("Error opening homepage")
+}
+
+};

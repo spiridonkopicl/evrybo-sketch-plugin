@@ -1,0 +1,22 @@
+{
+  "name": "Evrybo",
+  "description": "Exports Sketch Artboards to Evrybo",
+  "author": "spiridonkopicl",
+  "email": "support@evrybo.com",
+  "homepage": "http://evrybo.com",
+  "version": "1.0",
+  "identifier": "com.everybo.sketch.everybo-plugin",
+  "compatibleVersion": 3,
+  "bundleVersion": 1,
+  "commands": [{
+    "name": "Evrybo - home",
+    "identifier": "openevrybo",
+    "script": "gotoEvrybo.cocoascript",
+  }],
+  "menu": {
+    "title": "Everybo",
+    "items": [
+      "openevrybo"
+    ]
+  }
+}
