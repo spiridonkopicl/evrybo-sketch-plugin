@@ -85,3 +85,11 @@ Helper.prototype.saveUserIdAndToken = function (userId, token) {
     [[NSUserDefaults standardUserDefaults] setObject:userId forKey:"user"];
     [[NSUserDefaults standardUserDefaults] synchronize];
 };
+
+Helper.prototype.isDocumentSaved = function (context) {
+    var document = context.document;
+    if (![document fileURL] || [document isDocumentEdited]) {
+        return false;
+    }
+    return true;
+};

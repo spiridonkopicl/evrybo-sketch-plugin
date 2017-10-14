@@ -6,7 +6,11 @@ var onRun = function(context) {
     helper.init(context);
     if(helper.isLoggedIn()){
         if(helper.hasArtboard(context)) {
-            controller.showExportView(context, new ExporterAll());
+            if(helper.isDocumentSaved(context)) {
+                controller.showExportView(context, new ExporterAll());
+            } else {
+                controller.showAlertDocumentNotSaved();
+            }
         } else {
             controller.showAlertNoArtboardSelected();
         }

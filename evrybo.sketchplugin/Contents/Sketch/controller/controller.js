@@ -17,6 +17,14 @@ Controller.prototype.showAlertNoArtboardSelected = function () {
     alert.runModal()
 };
 
+Controller.prototype.showAlertDocumentNotSaved = function () {
+    var alert = NSAlert.alloc().init()
+    alert.setMessageText("Document not saved")
+    alert.setInformativeText("Please save the document before exporting to Evrybo.")
+    alert.addButtonWithTitle("OK")
+    alert.runModal()
+};
+
 Controller.prototype.showExportView = function (context, exporter) {
     var app = [NSApplication sharedApplication];
     var exportWindow = [[NSWindow alloc] init];
