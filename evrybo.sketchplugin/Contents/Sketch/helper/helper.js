@@ -93,3 +93,13 @@ Helper.prototype.isDocumentSaved = function (context) {
     }
     return true;
 };
+
+Helper.prototype.showNotification = function (context) {
+    var document = context.document;
+    var notification =  [[NSUserNotification alloc] init];
+    notification.title = @"Evrybo";
+    notification.subtitle = document.displayName();
+    notification.informativeText = @"Artboard sync completed successfully";
+    notification.soundName = NSUserNotificationDefaultSoundName;
+    [[NSUserNotificationCenter defaultUserNotificationCenter] deliverNotification:notification];
+}

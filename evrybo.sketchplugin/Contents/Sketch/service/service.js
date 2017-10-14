@@ -95,6 +95,10 @@ Service.prototype.uploadArtboards = function (context, artboards) {
             return;
         }
     }
+    if (res != nil) {
+        log('[INFO] post notication')
+        helper.showNotification(context)
+    }
 };
 
 function appendArtboardsToHttpBody(document, body, boundary, artboards) {
