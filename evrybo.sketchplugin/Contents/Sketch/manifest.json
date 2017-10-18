@@ -4,7 +4,7 @@
   "author": "Predrag Karic",
   "email": "support@evrybo.com",
   "homepage": "http://evrybo.com",
-  "version": "1.0",
+  "version": "1.0.1",
   "identifier": "com.everybo.sketch.everybo-plugin",
   "compatibleVersion": 3,
   "bundleVersion": 1,
@@ -17,12 +17,12 @@
     "identifier": "gotoHomepage",
     "script": "gotoHomepage.js"
   }, {
-    "name": "Export all",
+    "name": "Sync All Artboards to Evrybo",
     "identifier": "exportAll",
     "script": "exportAllArtboards.js",
     "shortcut": "command shift m"
   }, {
-    "name": "Export selected",
+    "name": "Sync Selected Artboards to Evrybo",
     "identifier": "exportSelected",
     "script": "exportSelectedArtboards.js",
     "shortcut": "command shift k"

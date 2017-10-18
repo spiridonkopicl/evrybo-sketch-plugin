@@ -88,12 +88,14 @@ Controller.prototype.showExportView = function (context, exporter) {
 };
 
 function fillComboBoxWithProjectsAndPreselect(projectsComboBox, result) {
+    [projects removeAllObjects];
     var projectNames = [[NSMutableArray alloc] init];
     for (i = 0; i < result.projects.length; i++) {
         const project = new Project(result.projects[i].id, result.projects[i].name, i);
         projects.addObject(project);
         projectNames.addObject(result.projects[i].name);
     }
+    projectsComboBox.removeAllItems();
     projectsComboBox.addItemsWithObjectValues(projectNames);
     var selectedProjectId = helper.getSelectedProjectId();
     var projectIndex = 0
