@@ -98,6 +98,13 @@ function fillComboBoxWithProjectsAndPreselect(projectsComboBox, result) {
     projectsComboBox.removeAllItems();
     projectsComboBox.addItemsWithObjectValues(projectNames);
     var selectedProjectId = helper.getSelectedProjectId();
+    if (projects.length == 1) {
+        // for some reason delegate method controlTextDidChange: is not triggered when there is just one item,
+        // so selected project, the only one in list is persisted again as workaround
+       let project = projects[0];
+       helper.saveSelectedProjectId(project);
+       selectedProjectId = helper.getSelectedProjectId();
+    }
     var projectIndex = 0
     if (selectedProjectId) {
         for(j = 0; j < projects.length; j++) {
@@ -157,7 +164,7 @@ Controller.prototype.showLoginView = function (context) {
 
     [loginButton setCOSJSTargetFunction:function(sender) {
         let errorResponse = service.login(email, password)
-        log('[ERROR] response login: ' + errorResponse)
+        log('[ERROR][evrybo] response login: ' + errorResponse)
         if (errorResponse != nil) {
             if (errorResponse == 401) {
                 [errorMessage setHidden: false];

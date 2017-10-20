@@ -17,14 +17,14 @@ Service.prototype.getAllProjectsForUser = function (userId) {
         error = MOPointer.alloc().init(),
         res = NSURLConnection.sendSynchronousRequest_returningResponse_error(request, response, error);
     if (error.value() != nil && res != nil){
-        log('[ERROR] login ' + error.value())
+        log('[ERROR][evrybo] login ' + error.value())
         var strError = [NSString stringWithFormat:@"%@", [[error value] description]];
         if ([strError rangeOfString:@"Code=-1012"].location != NSNotFound) {
-            log('[ERROR] 401 : Unauthorization')
+            log('[ERROR][evrybo] 401 : Unauthorization')
             // show unauthorizid labes
             return;
         }else{
-            log('[ERROR] other error ' + strError)
+            log('[ERROR][evrybo] other error ' + strError)
             return;
         }
     }
@@ -46,13 +46,13 @@ Service.prototype.login = function (email, password) {
         error = MOPointer.alloc().init(),
         res = NSURLConnection.sendSynchronousRequest_returningResponse_error(request, response, error);
     if (error.value() != nil && res != nil){
-        log('[ERROR] login ' + error.value())
+        log('[ERROR][evrybo] login ' + error.value())
         var strError = [NSString stringWithFormat:@"%@", [[error value] description]];
         if ([strError rangeOfString:@"Code=-1012"].location != NSNotFound) {
-            log('[ERROR] api: Unauthorized 401')
+            log('[ERROR][evrybo] api: Unauthorized 401')
             return 401;
         }else{
-            log('[ERROR] api: ' + strError)
+            log('[ERROR][evrybo] api: ' + strError)
             return;
         }
     }
@@ -85,19 +85,23 @@ Service.prototype.uploadArtboards = function (context, artboards) {
         error = MOPointer.alloc().init(),
         res = NSURLConnection.sendSynchronousRequest_returningResponse_error(request, response, error);
     if (error.value() != nil && res != nil){
-        log('[ERROR] login ' + error.value())
+        log('[ERROR][evrybo] login ' + error.value())
         var strError = [NSString stringWithFormat:@"%@", [[error value] description]];
         if ([strError rangeOfString:@"Code=-1012"].location != NSNotFound) {
-            log('[ERROR] 401 : Unauthorization')
+            log('[ERROR][evrybo] 401 : Unauthorization')
             return;
         }else{
-            log('[ERROR] other error ' + strError)
+            log('[ERROR][evrybo] other error ' + strError)
             return;
         }
     }
-    if (res != nil) {
-        log('[INFO] post notication')
-        helper.showNotification(context)
+    if (response != nil) {
+        let ns_httpUrlResponse = response.value()
+        let httpStatuCode = [ns_httpUrlResponse statusCode];
+        if (httpStatuCode == 201) {
+            log('[INFO][evrybo] sync - post notication')
+            helper.showNotification(context)
+        }
     }
 };
 
@@ -116,7 +120,7 @@ function appendArtboardsToHttpBody(document, body, boundary, artboards) {
         if ([[NSFileManager defaultManager] isDeletableFileAtPath:filePath]) {
             var success = [[NSFileManager defaultManager] removeItemAtPath:filePath error:nil];
             if (!success) {
-                log('[ERROR] deleting file at path' + filePath);
+                log('[ERROR][evrybo] deleting file at path' + filePath);
             }
         }
         // add image data

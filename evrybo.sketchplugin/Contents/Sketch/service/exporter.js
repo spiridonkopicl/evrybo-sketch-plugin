@@ -10,7 +10,7 @@ ExporterAll.prototype = Object.create(Exporter.prototype)
 ExporterAll.prototype.constructor = ExporterAll
 
 ExporterAll.prototype.export = function (context) {
-    log('[INFO] export all artboards - exporter');
+    log('[INFO][evrybo] export all artboards - exporter');
     var document = context.document,
         page = [document currentPage],
         artboards = [page artboards];
@@ -24,7 +24,7 @@ ExporterSelected.prototype = Object.create(Exporter.prototype)
 ExporterSelected.prototype.constructor = ExporterSelected
 
 ExporterSelected.prototype.export = function (context) {
-    log('[INFO] export selected artboards - exporter')
+    log('[INFO][evrybo] export selected artboards - exporter')
     var document = context.document,
         page = [document currentPage],
         artboards = [page artboards];
