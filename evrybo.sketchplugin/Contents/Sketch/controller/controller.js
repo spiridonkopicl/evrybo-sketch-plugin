@@ -46,12 +46,21 @@ Controller.prototype.showExportView = function (context, exporter) {
 
     [[exportWindow contentView] addSubview:box];
     var result = service.getAllProjectsForUser(helper.getUserId());
-    fillComboBoxWithProjectsAndPreselect(projectsComboBox, result);
+    if(!result.error) {
+        if (result.result.projects.length > 0) {
+            fillComboBoxWithProjectsAndPreselect(projectsComboBox, result.result);
+        }
+    }
 
     var exportButton = [[NSButton alloc] initWithFrame:NSMakeRect(150, 10, 100, 30)];
     [exportButton setTitle:"Sync"];
     [exportButton setBezelStyle:NSRoundedBezelStyle];
     [exportButton setKeyEquivalent:"\r"];
+    if (result.result.projects.length > 0) {
+        [exportButton setEnabled: true];
+    }else {
+        [exportButton setEnabled: false];
+    }
     [exportButton setCOSJSTargetFunction:function(sender) {
         [exportWindow orderOut:nil];
         [app stopModal];
@@ -164,8 +173,8 @@ Controller.prototype.showLoginView = function (context) {
 
     [loginButton setCOSJSTargetFunction:function(sender) {
         let errorResponse = service.login(email, password)
-        log('[ERROR][evrybo] response login: ' + errorResponse)
         if (errorResponse != nil) {
+            log('[ERROR][evrybo] login error response: ' + errorResponse)
             if (errorResponse == 401) {
                 [errorMessage setHidden: false];
                 return;

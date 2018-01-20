@@ -22,15 +22,15 @@ Service.prototype.getAllProjectsForUser = function (userId) {
         if ([strError rangeOfString:@"Code=-1012"].location != NSNotFound) {
             log('[ERROR][evrybo] 401 : Unauthorization')
             // show unauthorizid labes
-            return;
+            return { result: null, error: error.value()};
         }else{
             log('[ERROR][evrybo] other error ' + strError)
-            return;
+            return { result: null, error: error.value()};
         }
     }
     var dataString = NSString.alloc().initWithData_encoding(res, NSUTF8StringEncoding);
     var result = JSON.parse(dataString);
-    return result;
+    return { result: result, error: null};
 };
 
 Service.prototype.login = function (email, password) {
@@ -51,14 +51,15 @@ Service.prototype.login = function (email, password) {
         if ([strError rangeOfString:@"Code=-1012"].location != NSNotFound) {
             log('[ERROR][evrybo] api: Unauthorized 401')
             return 401;
-        }else{
+        }else {
             log('[ERROR][evrybo] api: ' + strError)
-            return;
+            return error.value();
         }
     }
     var dataString = NSString.alloc().initWithData_encoding(res, NSUTF8StringEncoding);
     var result = JSON.parse(dataString);
     helper.saveUserIdAndToken(result.user.id, authValue)
+    return null;
 };
 
 Service.prototype.uploadArtboards = function (context, artboards) {
@@ -96,6 +97,7 @@ Service.prototype.uploadArtboards = function (context, artboards) {
         }
     }
     if (response != nil) {
+        log('[INFO][evrybo] uploadArtboards: ' + response.value)
         let ns_httpUrlResponse = response.value()
         let httpStatuCode = [ns_httpUrlResponse statusCode];
         if (httpStatuCode == 201) {
