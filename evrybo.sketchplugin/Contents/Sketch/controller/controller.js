@@ -39,6 +39,16 @@ Controller.prototype.showExportView = function (context, exporter) {
     [box setFillColor:[NSColor colorWithRed: 255.0/255.0 green:255.0/255.0 blue:255.0/255.0 alpha:1.0]];
     [box addSubview:projectsComboBox];
 
+    var hintMessage = [[NSTextField alloc] initWithFrame:NSMakeRect([box frame].size.width/2 - 100, 60, 220, 40)];
+    [hintMessage setEditable:false];
+    [hintMessage setTextColor:[NSColor grayColor]];
+    [hintMessage setBordered:false];
+    [hintMessage setDrawsBackground:false];
+    [hintMessage setFont:[NSFont systemFontOfSize:11]];
+    [hintMessage setStringValue:"Please go to evrybo.com and create your first project."];
+    [hintMessage setHidden:true];
+    [box addSubview:hintMessage];
+
     var logoImageView = [[NSImageView alloc] initWithFrame:NSMakeRect([box frame].size.width/2 - 33, 150, 53, 44)];
     var logoImage = NSImage.alloc().initByReferencingFile(helper.scriptResourcesPath + "/" + "logo.png");
     [logoImageView setImage: logoImage];
@@ -48,7 +58,12 @@ Controller.prototype.showExportView = function (context, exporter) {
     var result = service.getAllProjectsForUser(helper.getUserId());
     if(!result.error) {
         if (result.result.projects.length > 0) {
+            [projectsComboBox setEnabled: true];
+            [hintMessage setHidden:true];
             fillComboBoxWithProjectsAndPreselect(projectsComboBox, result.result);
+        } else {
+            [projectsComboBox setEnabled: false];
+            [hintMessage setHidden:false];
         }
     }
 
