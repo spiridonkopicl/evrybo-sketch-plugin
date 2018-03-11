@@ -3,7 +3,8 @@
 
 var onRun = function(context) {
     helper.init(context);
-    if(helper.isLoggedIn()){
+    var userLogged = helper.isLoggedIn();
+    if(userLogged){
         controller.showLogoutView(context);
     } else {
         controller.showLoginView(context);

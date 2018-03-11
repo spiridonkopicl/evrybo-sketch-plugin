@@ -4,7 +4,8 @@
 
 var onRun = function(context) {
     helper.init(context);
-    if(helper.isLoggedIn()){
+    var userLogged = helper.isLoggedIn();
+    if(userLogged){
         if(helper.hasArtboardSelected(context)) {
             if(helper.isDocumentSaved(context)) {
                 controller.showExportView(context, new ExporterSelected());
