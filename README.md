@@ -3,6 +3,6 @@ This is Sketch plugin for [Evrybo](http://evrybo.com). Existing Evrybo users can
 
 These features are implemented: 
 * Existing users can log in (precondition for exporting artboards)
-* Export all Sketch art boards to Evrybo
-* Export selected Sketch art boards to Evrybo
+* Export all Sketch artboards to Evrybo
+* Export selected Sketch artboards to Evrybo
 * Goto Evrybo homepage from Sketch
